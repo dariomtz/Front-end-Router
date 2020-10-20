@@ -16,7 +16,7 @@ Uwing this component, the content will be in the most part dynamically rendered 
 ### Instantiation
 
 ``` JavaScript
-Router(config, config.clear, config.notFound, config.endpoits, config.endpoints[i],config.endpoints[i].path, config.endpoits[i].func);
+Router(config, config.clear, config.notFound, config.endpoits, config.endpoints[i], config.endpoints[i].path, config.endpoits[i].func);
 ```
 
 To correctly create an instance of  ``` Router ``` , a ```config``` object that has the following characteristics must be passed to the constructor.
