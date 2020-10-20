@@ -21,25 +21,23 @@ function Router(config){
 
         routes.final = true;
         routes.func = endpoint.func;
-    }
+    }    
 
-    console.log(this.endpoints);
-
-    window.addEventListener('popstate', function (event) {
+    window.addEventListener('popstate', (event) => {
+        console.log('Event listener');
         this.loadPath(window.location.pathname);
     });
 
     this.navigate = (pathname) => {
+        console.log('Navigate');
         window.history.pushState({},"", pathname);
         this.loadPath(window.location.pathname);
     }
 
     this.loadPath = (pathname) => {
         this.clear();
-        console.log(`Render the page '${ pathname }'`);
         let func = this.pathFunction(pathname);
         func();
-        console.log(`The page '${ pathname }' was rendered.`);
     }
 
     this.pathFunction = (pathname) => {
@@ -55,10 +53,9 @@ function Router(config){
             }
         }
 
-        console.log(route);
-
         if ('final' in route) return route.func;
         else return this.notFound;
     }
 
+    this.loadPath(window.location.pathname);
 }
