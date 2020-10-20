@@ -10,7 +10,7 @@ Uwing this component, the content will be in the most part dynamically rendered 
  Include the component before any other js file:
 
  ```HTML
- <script src="https://front-end-router.web.app/index.js"></script>
+ <script src="https://front-end-router.web.app/Router.js"></script>
  ```
 
 ### Instantiation
