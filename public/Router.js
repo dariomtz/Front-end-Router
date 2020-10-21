@@ -2,6 +2,8 @@ function Router(config){
     this.endpoints = {};
     this.clear = config.clear;
     this.notFound = config.notFound;
+    this.historyStack = [];
+    this.forwardStack = [];
 
     for (const endpoint of config.endpoints) {
         let routes = this.endpoints;
@@ -24,14 +26,26 @@ function Router(config){
     }    
 
     window.addEventListener('popstate', (event) => {
-        console.log('Event listener');
         this.loadPath(window.location.pathname);
     });
 
     this.navigate = (pathname) => {
-        console.log('Navigate');
         window.history.pushState({},"", pathname);
         this.loadPath(window.location.pathname);
+        this.historyStack.push(pathname);
+    }
+
+    this.back = () => {
+        if (this.historyStack.length > 1){
+            this.forwardStack.push(this.historyStack.pop());
+            this.navigate(this.historyStack.pop());
+        }
+    }
+
+    this.forward = () => {
+        if (this.forwardStack.length){
+            this.navigate(this.forwardStack.pop());
+        }
     }
 
     this.loadPath = (pathname) => {
@@ -58,4 +72,5 @@ function Router(config){
     }
 
     this.loadPath(window.location.pathname);
+    this.historyStack.push(window.location.pathname);
 }
