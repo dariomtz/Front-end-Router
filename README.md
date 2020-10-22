@@ -83,7 +83,9 @@ const config = {
 
 ### Usage
 
-The router will be automatically used every time you create the instance, so that whenever the page is created it runs the correct function to render the content.
+The router will be automatically used every time you create the instance, so that whenever the page is created it will render the content corresponding to the path.
+
+#### Navigate
 
 To go from one page to another, just call the ```navigate(path)``` method on the ```Router``` object to navigate to a certain ```path```. 
 
@@ -97,3 +99,30 @@ router.navigate('/about');
 
 Notice that the path must be absolute, just as it was defined during the endpoints.
 
+It is posible to pass the pointer to this method to a global variable, so that you can access it at any time.
+
+```JavaScript
+var nav;
+
+//later on... After Router instanciation.
+
+nav = router.navigate;
+```
+
+#### Back
+
+The ```back()``` method navigates to the previous page rendered. Even though pressing the back button on the browser will take the user to the same page, it will not behave the same. Calling the back function will not refresh the page in the browser, but just call the ```clear()``` function and render the corresponding path function.
+
+Therefore, for a smother experience we recomend using the ```back()``` method.
+
+```JavaScript
+router.back();
+```
+
+#### Forward
+
+The ```forward()``` method works similarly to the ```back()``` method, just to go forward. Therefore, it will be faster than a browser forward.
+
+```JavaScript
+router.forward();
+```
