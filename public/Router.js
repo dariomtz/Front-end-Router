@@ -14,8 +14,16 @@ function Router(config){
         for (var i = 0; i < path.length; i++) {
             let slice = path[i];
             if (i + 1 === path.length && slice === "") break;
-            
-            if (!(slice in routes)){
+
+            if (slice[0] == ':'){
+                if (!('default' in routes)){
+                    routes.default = {
+                        name: slice.substring(1),
+                    };
+                }
+                slice = 'default';
+                 
+            } else if (!(slice in routes)){
                 routes[slice] = {};
             }
             routes = routes[slice];
@@ -50,25 +58,29 @@ function Router(config){
 
     this.loadPath = (pathname) => {
         this.clear();
-        let func = this.pathFunction(pathname);
-        func();
+        let {func, params} = this.pathFunction(pathname);
+        func(params);
     }
 
     this.pathFunction = (pathname) => {
         let path = pathname.split(/\//);
         let route = this.endpoints;
+        let params = {}
 
         for (var i = 0; i < path.length; i++){
             if (i + 1 === path.length && path[i] === "") break;
             if(path[i] in route){
                 route = route[path[i]];
+            }else if('default' in route){
+                route = route.default;
+                params[route.name] = path[i];
             }else{
-                return this.notFound;
+                return {func: this.notFound, params: params};
             }
         }
 
-        if ('final' in route) return route.func;
-        else return this.notFound;
+        if ('final' in route) return { func:route.func, params: params};
+        else return {func: this.notFound, params: params};
     }
 
     this.loadPath(window.location.pathname);
