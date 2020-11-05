@@ -85,6 +85,16 @@ const config = {
 
 The router will be automatically used every time you create the instance, so that whenever the page is created it will render the content corresponding to the path.
 
+#### Path definition
+
+The definition of a path in the config file must be absolute. That means, it must begin with a ```'/'```. An example of a valid absolute path must be ```'/about'```.
+
+To define a path with variable it is necesary to use ```':'``` before the name of the path. For example, ```'/users/:userId'```. In this case, the ```userId``` is a variable in the path, and the value that is passed into the url in this position will be saved in the parameters object as a property. This object is going to be passed to the function that will handle this endpoint.
+
+Let's say you have the function ```renderUserPage(params)```. To access the ```userId``` that is written on the path, you can do it vía ```params.userId``` and ```params[userId]```.
+
+If the path does not receive any variable, it is not necessary to define to receive the params argument.
+
 #### Navigate
 
 To go from one page to another, just call the ```navigate(path)``` method on the ```Router``` object to navigate to a certain ```path```. 
