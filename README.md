@@ -1,7 +1,7 @@
 # Front-end Router
-Front-end routing allows you to develop powerful web apps with only one HTML file, making it possible to avoid reloading the entire page and making your web aplications more responsive.
+Front-end routing allows you to develop powerful web apps with only one HTML file, making it possible to avoid reloading the entire page and making your web applications more responsive.
 
-Uwing this component, the content will be in the most part dynamically rendered with JavaScript and at the same time, you will have the advantages of responding to different endpoints with different content.
+Using this component, the content will be in the most part dynamically rendered with JavaScript and at the same time, you will have the advantages of responding to different endpoints with different content.
 
  ## How to use
 
